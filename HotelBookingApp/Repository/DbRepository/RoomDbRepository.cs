@@ -38,7 +38,7 @@ namespace HotelBookingApp.Repository.DbRepository
 
         public Task<Room> GetRoomById(int room_id)
         {
-            var room = this._context.Room
+            var room = this._context.Rooms
                            .Include(e => e.Category)
                            .FirstOrDefaultAsync(m => m.Id == room_id);
 

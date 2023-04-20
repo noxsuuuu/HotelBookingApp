@@ -35,7 +35,7 @@ namespace HotelBookingApp.Models
         public ICollection<Room> Room { get; set; }
 */
         [ValidateNever]
-        public ICollection<Booking> Booking { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
 
         [ValidateNever]
         public IdentityRole Role { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace HRBMSWEBAPP.ViewModel
+namespace HotelBookingApp.ViewModel
 {
     public class RegisterViewModel
     {
