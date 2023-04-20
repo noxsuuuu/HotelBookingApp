@@ -20,6 +20,15 @@ namespace HotelBookingApp.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            // seed some basic data 
+            // administrator user in the user table
+            modelBuilder.SeedDefaultData();
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Room> Rooms { get; set; }
 
         public DbSet<RoomCategory> RoomsCategories { get; set;}
