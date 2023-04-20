@@ -27,7 +27,7 @@ namespace HotelBookingApp.Controllers
 
         public async Task<IActionResult> GetAllBookings()
         {
-            List<Booking> booking = await this._repo.GetAllBooking();
+            var booking = await this._repo.GetAllBooking();
             return View(booking);
 
         }
