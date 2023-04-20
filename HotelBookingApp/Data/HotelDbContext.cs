@@ -10,7 +10,7 @@ namespace HotelBookingApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=HRBMSDB; ";
+            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=HotelDB; ";
             optionsBuilder
                 .UseSqlServer(connectionString)
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
