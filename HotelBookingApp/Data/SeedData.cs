@@ -1,4 +1,5 @@
 ﻿using HotelBookingApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBookingApp.Data
@@ -26,6 +27,24 @@ namespace HotelBookingApp.Data
                     Price = 5000,
                 }
 
+                );
+
+            modelBuilder
+                .Entity<IdentityRole>()
+                .HasData(
+                    new IdentityRole
+                    {
+
+                        Name = "Admin",
+                        NormalizedName = "ADMIN"
+
+                    },
+                     new IdentityRole
+                     {
+
+                         Name = "Guest",
+                         NormalizedName = "GUEST"
+                     }
                 );
         }
 

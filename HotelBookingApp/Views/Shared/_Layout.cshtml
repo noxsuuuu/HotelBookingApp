@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> _signInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,6 +36,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="RoomCategory" asp-action="GetAllRoomCategory">Category</a>
                         </li>
+                          <li class="nav-item" >
+                        <a style="padding-right:10%" class="nav-link collapsed" asp-controller="Account" asp-action="Login">
+                            <i  class="bi bi-box-arrow-in-right"></i>
+                            <span>Login</span>
+                        </a>
+                    <li class="nav-item" >
+                        <a style="padding-right:10%" class="nav-link collapsed" asp-controller="Account" asp-action="Register">
+                            <i  class="bi bi-card-list"></i>
+                            <span>Register</span>
+                        </a>
+                    </li>
                     </ul>
                 </div>
             </div>

@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelBookingApp.Controllers
 {
-    public class AccountController : Controller
+   
+     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager { get; }
         // login user details 
