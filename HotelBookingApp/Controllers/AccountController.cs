@@ -1,4 +1,5 @@
 ﻿using HotelBookingApp.Models;
+using HotelBookingApp.Repository;
 using HotelBookingApp.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,16 @@ namespace HotelBookingApp.Controllers
         private SignInManager<ApplicationUser> _signInManager { get; }
         public RoleManager<IdentityRole> _roleManager { get; }
 
+        private readonly IAccountRepository _accountRepository;
         public AccountController(UserManager<ApplicationUser> userManager,
                                 SignInManager<ApplicationUser> signInManager,
-                                RoleManager<IdentityRole> roleManager)
+                                RoleManager<IdentityRole> roleManager,
+                                IAccountRepository accountRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _accountRepository = accountRepository;
         }
 
         [HttpGet]
@@ -43,6 +47,7 @@ namespace HotelBookingApp.Controllers
                 var result = await _userManager.CreateAsync(userModel, userViewModel.Password);
                 if (result.Succeeded)
                 {
+                    ViewBag.IsSuccess = true;
                     // add roles to it and allow him to login
                     //var roles = _roleManager.Roles.ToList();
                     //var role = _roleManager.Roles.FirstOrDefault(r => r.Name == "Admin");
@@ -100,6 +105,7 @@ namespace HotelBookingApp.Controllers
 
                 if (result.Succeeded)
                 {
+                    ViewBag.IsSuccess = true;
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError(string.Empty, "invalid login credentials");
@@ -115,6 +121,33 @@ namespace HotelBookingApp.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePassViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountRepository.ChangePasswordAsync(model);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                    //ModelState.Clear();
+                    return View();
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(model);
         }
     }
 }

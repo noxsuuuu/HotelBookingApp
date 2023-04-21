@@ -2,6 +2,7 @@ using HotelBookingApp.Data;
 using HotelBookingApp.Models;
 using HotelBookingApp.Repository;
 using HotelBookingApp.Repository.DbRepository;
+using HotelBookingApp.Service;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +14,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<HotelDbContext>();
 builder.Services.AddScoped<HotelDbContext, HotelDbContext>();
 
-
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAccountRepository, AccountDbRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingDbRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomDbRepository>();
 builder.Services.AddScoped<IRoomCategoryRepository, RoomCategoryDbRepository>();
+
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<HotelDbContext>();

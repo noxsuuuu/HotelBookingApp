@@ -1,4 +1,5 @@
 ﻿using HotelBookingApp.Models;
+using HotelBookingApp.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,19 +8,24 @@ namespace HotelBookingApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
         public IActionResult Index()
         {
+            var userId = _userService.GetUserId();
+            var isLoggedIn = _userService.isAuthenticated();
             return View();
         }
 
         public IActionResult Privacy()
         {
+            
             return View();
         }
 
