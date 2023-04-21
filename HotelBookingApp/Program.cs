@@ -17,9 +17,18 @@ builder.Services.AddScoped<HotelDbContext, HotelDbContext>();
 builder.Services.AddScoped<IBookingRepository, BookingDbRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomDbRepository>();
 builder.Services.AddScoped<IRoomCategoryRepository, RoomCategoryDbRepository>();
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<HotelDbContext>();
-
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredUniqueChars = 0;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
